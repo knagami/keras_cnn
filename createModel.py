@@ -26,7 +26,7 @@ OUTPUT_MODEL_FILE = "model.h5"
 # Output Plot File Name
 OUTPUT_PLOT_FILE = "model.png"
 RESIZE=128
-EPOCS = 50
+EPOCS = 150
 
 def load_images(image_directory):
     image_file_list = []
