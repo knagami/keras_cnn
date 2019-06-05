@@ -132,6 +132,13 @@ def main():
     print("指定した画像ファイルをもとに学習を行いモデルを生成します。")
     print("===================================================================")
 
+    # ディレクトリの作成
+    if not os.path.isdir(OUT_IMAGE_TRAIN):
+        os.mkdir(OUT_IMAGE_TRAIN)
+    if not os.path.isdir(OUT_IMAGE_TEST):
+        os.mkdir(OUT_IMAGE_TEST)
+    if not os.path.isdir(OUT_IMAGE_RINKAKU):
+        os.mkdir(OUT_IMAGE_RINKAKU)
     # ディレクトリ内のファイル削除
     delete_dir(OUT_IMAGE_TRAIN, False)
     delete_dir(OUT_IMAGE_TEST, False)
