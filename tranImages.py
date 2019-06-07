@@ -14,10 +14,10 @@ RETURN_SUCCESS = 0
 RETURN_FAILURE = -1
 # Train Image Directory
 IN_IMAGE_DIR= "./shoes_img"
-OUT_IMAGE_TRAIN= "./shoes_img_train"
-OUT_IMAGE_TEST = "./shoes_img_test"
-OUT_IMAGE_RINKAKU = "./shoes_img_rinkaku"
-RESIZE=128
+OUT_IMAGE_OBJECT = "./img_obj"
+OUT_IMAGE_TRAIN= "./resize_img_train"
+OUT_IMAGE_TEST= "./resize_img_test"
+RESIZE = 128
 
 def load_images(image_directory):
     i = 0
@@ -27,23 +27,24 @@ def load_images(image_directory):
     for image_file_name in image_file_name_list:
         if image_file_name != ".DS_Store":
             print(image_file_name);
-            image_file_name_list2 = os.listdir(image_directory + "/" + image_file_name)
             j = 0
+            image_file_name_list2 = os.listdir(image_directory + "/" + image_file_name)
             for image_file_name2 in image_file_name_list2:
                 if image_file_name2 != ".DS_Store":
                     print(image_file_name2);
                     in_file_path = IN_IMAGE_DIR + "/" + image_file_name + "/"  + image_file_name2
                     out_file_path = OUT_IMAGE_TRAIN + "/0" + str(i) + image_file_name2
-                    out_file_path2 = OUT_IMAGE_RINKAKU + "/" + image_file_name2
+                    out_file_path2 = OUT_IMAGE_OBJECT + "/" + image_file_name2
                     if j < 3:
                         out_file_path = OUT_IMAGE_TEST + "/0" + str(i) + image_file_name2
+
                     doRinkaku(in_file_path,out_file_path,out_file_path2)
                     doSquare(out_file_path2,out_file_path)
                     doScale(out_file_path,out_file_path)
 
                     #doGlay(out_file_path,out_file_path)
-                    j=j + 1
-            i=i + 1
+                    j = j + 1
+            i = i + 1
 
 def doGlay(in_file_path,out_file_path ):
     # 画像ファイルのグレースケール化
@@ -133,17 +134,17 @@ def main():
     print("===================================================================")
 
     # ディレクトリの作成
+    if not os.path.isdir(OUT_IMAGE_OBJECT):
+        os.mkdir(OUT_IMAGE_OBJECT)
     if not os.path.isdir(OUT_IMAGE_TRAIN):
         os.mkdir(OUT_IMAGE_TRAIN)
     if not os.path.isdir(OUT_IMAGE_TEST):
         os.mkdir(OUT_IMAGE_TEST)
-    if not os.path.isdir(OUT_IMAGE_RINKAKU):
-        os.mkdir(OUT_IMAGE_RINKAKU)
     # ディレクトリ内のファイル削除
+    delete_dir(OUT_IMAGE_OBJECT, False)
     delete_dir(OUT_IMAGE_TRAIN, False)
     delete_dir(OUT_IMAGE_TEST, False)
-    delete_dir(OUT_IMAGE_RINKAKU, False)
-
+    
     load_images(IN_IMAGE_DIR)
    
     return RETURN_SUCCESS

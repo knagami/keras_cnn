@@ -1,3 +1,1 @@
-shoes_img_rinkaku/*.jpg
-shoes_img_test/*.jpg
-shoes_img_train/*.jpg
+*img*/*.jpg

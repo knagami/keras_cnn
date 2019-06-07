@@ -16,17 +16,17 @@ RETURN_FAILURE = -1
 # Outoput Model Only
 OUTPUT_MODEL_ONLY = False
 # Test Image Directory
-TEST_IMAGE_DIR = "./shoes_img_test"
+TEST_IMAGE_DIR = "./img_test"
 # Train Image Directory
-TRAIN_IMAGE_DIR = "./shoes_img_train"
+TRAIN_IMAGE_DIR = "./img_train"
 # Output Model Directory
 OUTPUT_MODEL_DIR = "./model"
 # Output Model File Name
 OUTPUT_MODEL_FILE = "model.h5"
 # Output Plot File Name
 OUTPUT_PLOT_FILE = "model.png"
-RESIZE=128
-EPOCS = 150
+RESIZE = 128
+EPOCS = 50
 
 def load_images(image_directory):
     image_file_list = []
