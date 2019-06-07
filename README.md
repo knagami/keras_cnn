@@ -11,7 +11,7 @@
 >python3 genImages.p
 
 4. 以下のコマンドで、3で生成した画像を、ランダムで30度回転した画像を2個分追加（水増し）  
->python3 genImages.p
+>python3 genImages2.p
 
 5. 以下のコマンドで、4で生成した画像を元にCNNモデルを作成する  
 >python3 createModel.py
