@@ -8,10 +8,10 @@
 >python3 tranImages.py
 
 3. 以下のコマンドで、2で生成した画像を、180度回転した画像を追加（画像の水増し）  
->python3 genImages.p
+>python3 genImages.py
 
 4. 以下のコマンドで、3で生成した画像を、ランダムで30度回転した画像を2個分追加（画像の水増し）  
->python3 genImages2.p
+>python3 genImages2.py
 
 5. 以下のコマンドで、4で生成した画像を元にCNNモデルを作成する  
 >python3 createModel.py
