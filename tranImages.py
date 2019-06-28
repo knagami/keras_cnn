@@ -35,10 +35,11 @@ def load_images(image_directory):
                     in_file_path = IN_IMAGE_DIR + "/" + image_file_name + "/"  + image_file_name2
                     out_file_path = OUT_IMAGE_TRAIN + "/0" + str(i) + image_file_name2
                     out_file_path2 = OUT_IMAGE_OBJECT + "/" + image_file_name2
+                    out_file_path3 = OUT_IMAGE_OBJECT + "/" + image_file_name2 + ".rinkaku.jpg"
                     if j < 3:
                         out_file_path = OUT_IMAGE_TEST + "/0" + str(i) + image_file_name2
 
-                    doRinkaku(in_file_path,out_file_path,out_file_path2)
+                    doRinkaku(in_file_path,out_file_path,out_file_path2,out_file_path3)
                     doSquare(out_file_path2,out_file_path)
                     doScale(out_file_path,out_file_path)
 
@@ -78,7 +79,7 @@ def doScale(in_file_path,out_file_path):
     image_gs = cv2.resize(img, (RESIZE,RESIZE))
     cv2.imwrite(out_file_path, image_gs)
                 
-def doRinkaku(in_file_path,out_file_path,out_file_path2):
+def doRinkaku(in_file_path,out_file_path,out_file_path2,out_file_path3):
     # original（輪郭記述用）
     img_org = cv2.imread(in_file_path)
     # グレースケール化
@@ -114,6 +115,15 @@ def doRinkaku(in_file_path,out_file_path,out_file_path2):
         x,y,w,h = cv2.boundingRect(cnt)
         clipped = img_org[y:y+h, x:x+w]
         cv2.imwrite(out_file_path2, clipped)
+        
+        # 境界の描画 
+        cv2.drawContours(img_org,
+                         [approx],
+                         -1,    # 表示する輪郭. 全表示は-1
+                         (255,255, 0),
+                         3)    # 等高線の太さ
+        cv2.imwrite(out_file_path3, img_org)
+        
         break
  
 def delete_dir(dir_path, is_delete_top_dir=True):
