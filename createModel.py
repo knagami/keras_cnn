@@ -25,8 +25,9 @@ OUTPUT_MODEL_DIR = "./model"
 OUTPUT_MODEL_FILE = "model.h5"
 # Output Plot File Name
 OUTPUT_PLOT_FILE = "model.png"
-RESIZE = 128
+RESIZE = 64
 EPOCS = 50
+doGRAY = True
 
 def load_images(image_directory):
     image_file_list = []
@@ -51,9 +52,17 @@ def labeling_images(image_file_list):
     y_data = []
     for idx, (file_name, image) in enumerate(image_file_list):
         # 画像をBGR形式からRGB形式へ変換
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        if doGRAY:
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        else:
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            
         # 画像配列（RGB画像）
-        x_data.append(np.expand_dims(image,axis=2))
+        if doGRAY:
+            x_data.append(np.expand_dims(image,axis=2))
+        else:
+            x_data.append(image)
+            
         # ラベル配列（ファイル名の先頭2文字をラベルとして利用する）
         label = int(file_name[0:2])
         print(f"ラベル:{label:02}　画像ファイル名:{file_name}")
@@ -134,7 +143,11 @@ def main():
     # strides       ストライドの幅(フィルタを動かすピクセル数)
     # padding       データの端の取り扱い方(入力データの周囲を0で埋める(ゼロパディング)ときは'same',ゼロパディングしないときは'valid')
     # activation    活性化関数
-    model.add(Conv2D(input_shape=(RESIZE, RESIZE, 1), filters=32, kernel_size=(3, 3),
+    if doGRAY:
+        model.add(Conv2D(input_shape=(RESIZE, RESIZE, 1), filters=32, kernel_size=(3, 3),
+                     strides=(1, 1), padding="same", activation='relu'))
+    else:
+        model.add(Conv2D(input_shape=(RESIZE, RESIZE, 3), filters=32, kernel_size=(3, 3),
                      strides=(1, 1), padding="same", activation='relu'))
     # 2x2の4つの領域に分割して各2x2の行列の最大値をとることで出力をダウンスケールする
     # パラメータはダウンスケールする係数を決定する2つの整数のタプル

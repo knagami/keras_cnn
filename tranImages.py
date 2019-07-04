@@ -17,7 +17,7 @@ IN_IMAGE_DIR= "./shoes_img"
 OUT_IMAGE_OBJECT = "./img_obj"
 OUT_IMAGE_TRAIN= "./resize_img_train"
 OUT_IMAGE_TEST= "./resize_img_test"
-RESIZE = 128
+RESIZE = 64
 
 def load_images(image_directory):
     i = 0
