@@ -185,7 +185,7 @@ def main():
     model.add(Dense(num_classes, activation='softmax'))
 
     # コンパイル
-    model.compile(optimizer=SGD(lr=0.0001,momentum=0.9),
+    model.compile(optimizer='sgd',
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
 
