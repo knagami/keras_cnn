@@ -9,7 +9,7 @@ from keras.models import Sequential
 # tensorflowのkerasはimport時にpydot_ng,pydotplusをimportするように記述されているが，
 # keras(ver=2.2.0)はimport時，pydotしかimportするようにしか記述されていないため下記とする
 from tensorflow.python.keras.utils.vis_utils import plot_model
-
+from keras.optimizers import SGD
 
 RETURN_SUCCESS = 0
 RETURN_FAILURE = -1
@@ -27,7 +27,7 @@ OUTPUT_MODEL_FILE = "model.h5"
 OUTPUT_PLOT_FILE = "model.png"
 RESIZE = 64
 EPOCS = 50
-doGRAY = True
+doGRAY = False
 
 def load_images(image_directory):
     image_file_list = []
@@ -185,7 +185,7 @@ def main():
     model.add(Dense(num_classes, activation='softmax'))
 
     # コンパイル
-    model.compile(optimizer='sgd',
+    model.compile(optimizer=SGD(lr=0.0001,momentum=0.9),
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
 

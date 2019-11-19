@@ -15,3 +15,6 @@
 
 5. 以下のコマンドで、4で生成した画像を元にCNNモデルを作成する  
 >python3 createModel.py
+
+6. 以下のコマンドで、4で生成した画像を元に転移学習 
+>python3 createModel2.py
